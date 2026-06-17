@@ -62,7 +62,20 @@ def add_contact(contacts):
     print("Contact added")
 
 def print_contact(index, contact):
-    print(f'{index}. {contact["name"]} | {contact["phone"]} | {contact["city"]}')    
+    print(f'{index}. {contact["name"]} | {contact["phone"]} | {contact["city"]}')
+
+def search_contacts(contacts, key, value):
+    
+    found = False
+
+    for index, contact in enumerate(contacts, start=1):
+
+        if contact[key] == value:
+            print_contact(index, contact)
+            found = True
+    
+    return found
+
 
 def search_by_city(contacts):
     city = input("Enter city: ").strip().capitalize()
@@ -71,15 +84,11 @@ def search_by_city(contacts):
         print("City cannot be empty")
         return
 
-    found = False
-
-    for index, contact in enumerate(contacts, start=1):
-        if contact["city"] == city:
-            print_contact(index, contact)
-            found = True
+    found = search_contacts(contacts, "city", city)
 
     if not found:
         print("No contacts in this city")
+
 
 def search_by_name(contacts):
     name = input("Enter name: ").strip().capitalize()
@@ -88,12 +97,7 @@ def search_by_name(contacts):
         print("Name cannot be empty")
         return
     
-    found = False
-
-    for index, contact in enumerate(contacts, start=1):
-        if contact["name"] == name:
-            print_contact(index, contact)
-            found = True
+    found = search_contacts(contacts, "name", name)
 
     if not found:
         print("No contacts with this name")
