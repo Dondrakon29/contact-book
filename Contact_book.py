@@ -23,10 +23,11 @@ contacts = load_contacts()
 
 def show_menu():
     print("1 - Add contact")
-    print("2 - Show contact")
+    print("2 - Show contacts")
     print("3 - Search by city")
     print("4 - Search by name")
     print("5 - Delete contact")
+    print("6 - Edit contact")
     print("0 - Exit")
 
 def add_contact(contacts):
@@ -95,7 +96,54 @@ def search_by_name(contacts):
             found = True
 
     if not found:
-        print("No contacts with this name")        
+        print("No contacts with this name")
+
+def edit_contact(contacts):
+    if not contacts:
+        print("No contacts to edit")
+        return
+
+    show_contacts(contacts)
+
+    try:
+        number = int(input("Enter contact number: "))
+    
+    except ValueError:
+        print("Contact number must be a number")
+        return
+
+    if number < 1 or number > len(contacts):
+        print("Invalid contact number")
+        return
+
+    index = number - 1
+    contact = contacts[index]
+
+    new_name = input("Enter new name: ").strip().capitalize()
+
+    if not new_name:
+        print("Name cannot be empty")
+        return
+
+    new_phone = input("Enter new phone: ").strip()
+
+    if not new_phone:
+        print("Phone cannot be empty")
+        return
+
+    new_city = input("Enter new city: ").strip().capitalize()
+
+    if not new_city:
+        print("City cannot be empty")
+        return
+
+    contact["name"] = new_name
+    contact["phone"] = new_phone
+    contact["city"] = new_city
+
+    save_contacts(contacts)
+
+    print("Contact updated")                  
 
                 
 
@@ -109,7 +157,6 @@ def show_contacts(contacts):
         print_contact(index, contact)
 
 def delete_contact(contacts):
-
     if not contacts:
         print("No contacts to delete")
         return
@@ -118,16 +165,19 @@ def delete_contact(contacts):
 
     try:
         number = int(input("Enter contact number: "))
-
     except ValueError:
         print("Contact number must be a number")
+        return
+
+    if number < 1 or number > len(contacts):
+        print("Invalid contact number")
         return
 
     index = number - 1
     deleted_contact = contacts.pop(index)
     save_contacts(contacts)
 
-    print("Deleted:", deleted_contact["name"])             
+    print("Deleted:", deleted_contact["name"])            
 
 
 def run_app():
@@ -145,7 +195,9 @@ def run_app():
         elif choice == "4":
             search_by_name(contacts)    
         elif choice == "5":
-            delete_contact(contacts)            
+            delete_contact(contacts)
+        elif choice == "6":
+            edit_contact(contacts)                
         elif choice == "0":
             print("Goodbye!")
             break
