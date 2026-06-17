@@ -30,24 +30,78 @@ def show_menu():
     print("6 - Edit contact")
     print("0 - Exit")
 
-def add_contact(contacts):
-
-    name = input("Enter name: ").strip().capitalize()
+def get_name(prompt):
+    name = input(prompt).strip().capitalize()
 
     if not name:
         print("Name cannot be empty")
-        return
+        return None
 
-    phone = input("Enter phone: ").strip()
+    return name
+
+
+def get_phone(prompt):
+    phone = input(prompt).strip()
 
     if not phone:
         print("Phone cannot be empty")
-        return
-    
-    city = input("Enter city: ").strip().capitalize()
+        return None
+
+    return phone
+
+
+def get_city(prompt):
+    city = input(prompt).strip().capitalize()
 
     if not city:
         print("City cannot be empty")
+        return None
+
+    return city
+
+def get_optional_name(prompt, current_name):
+    
+    name = input(prompt).strip().capitalize()
+
+    if not name:
+        return current_name
+    
+    return name
+
+def get_optional_phone(prompt, current_phone):
+
+    phone = input(prompt).strip()
+
+    if not phone:
+        return current_phone
+    
+    return phone
+
+def get_optional_city(prompt, current_city):
+
+    city = input(prompt).strip().capitalize()
+
+    if not city:
+        return current_city
+    
+    return city
+
+
+def add_contact(contacts):
+
+    name = get_name("Enter name: ")
+
+    if name is None:
+        return
+
+    phone = get_phone("Enter phone: ")
+
+    if phone is None:
+        return
+    
+    city = get_city("Enter city: ")
+
+    if city is None:
         return
 
     contact = {
@@ -126,20 +180,11 @@ def edit_contact(contacts):
     print("Current contact:")
     print(number, contact)
 
-    new_name = input("Enter new name or press enter to keep current: ").strip().capitalize()
+    new_name = get_optional_name("Enter new name or press enter to keep current: ", contact["name"])
 
-    if not new_name:
-        new_name = contact["name"]
+    new_phone = get_optional_phone("Enter new phone or press enter to keep current: ", contact["phone"])
 
-    new_phone = input("Enter new phone or press enter to keep current: ").strip()
-
-    if not new_phone:
-        new_phone = contact["phone"]
-
-    new_city = input("Enter new city or press enter to keep current: ").strip().capitalize()
-
-    if not new_city:
-        new_city = contact["city"]
+    new_city = get_optional_city("Enter new city or press enter to keep current: ", contact["city"])
 
     contact["name"] = new_name
     contact["phone"] = new_phone
