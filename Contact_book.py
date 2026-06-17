@@ -119,23 +119,23 @@ def edit_contact(contacts):
     index = number - 1
     contact = contacts[index]
 
-    new_name = input("Enter new name: ").strip().capitalize()
+    print("Current contact:")
+    print(number, contact)
+
+    new_name = input("Enter new name or press enter to keep current: ").strip().capitalize()
 
     if not new_name:
-        print("Name cannot be empty")
-        return
+        new_name = contact["name"]
 
-    new_phone = input("Enter new phone: ").strip()
+    new_phone = input("Enter new phone or press enter to keep current: ").strip()
 
     if not new_phone:
-        print("Phone cannot be empty")
-        return
+        new_phone = contact["phone"]
 
-    new_city = input("Enter new city: ").strip().capitalize()
+    new_city = input("Enter new city or press enter to keep current: ").strip().capitalize()
 
     if not new_city:
-        print("City cannot be empty")
-        return
+        new_city = contact["city"]
 
     contact["name"] = new_name
     contact["phone"] = new_phone
