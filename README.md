@@ -81,6 +81,9 @@ Each contact is stored as a dictionary:
 - loading data from file
 - searching data
 - deleting data
+- editing existing data
+- clearing data with confirmation
+- helper functions
 - basic refactoring
 - Git commits
 - GitHub repository
