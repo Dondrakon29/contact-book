@@ -25,7 +25,8 @@ def show_menu():
     print("1 - Add contact")
     print("2 - Show contact")
     print("3 - Search by city")
-    print("4 - Delete contact")
+    print("4 - Search by name")
+    print("5 - Delete contact")
     print("0 - Exit")
 
 def add_contact(contacts):
@@ -78,6 +79,24 @@ def search_by_city(contacts):
 
     if not found:
         print("No contacts in this city")
+
+def search_by_name(contacts):
+    name = input("Enter name: ").strip().capitalize()
+
+    if not name:
+        print("Name cannot be empty")
+        return
+    
+    found = False
+
+    for index, contact in enumerate(contacts, start=1):
+        if contact["name"] == name:
+            print_contact(index, contact)
+            found = True
+
+    if not found:
+        print("No contacts with this name")        
+
                 
 
 def show_contacts(contacts):
@@ -124,6 +143,8 @@ def run_app():
         elif choice == "3":
             search_by_city(contacts)
         elif choice == "4":
+            search_by_name(contacts)    
+        elif choice == "5":
             delete_contact(contacts)            
         elif choice == "0":
             print("Goodbye!")

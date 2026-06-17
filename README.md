@@ -7,6 +7,7 @@ A simple Python console project for managing contacts.
 - Add new contacts
 - Show all contacts
 - Search contacts by city
+- Search contacts by name
 - Delete contacts by number
 - Save contacts to JSON file
 - Load contacts from JSON file
@@ -38,7 +39,8 @@ python Contact_book.py
 1 - Add contact
 2 - Show contacts
 3 - Search by city
-4 - Delete contact
+4 - Search by name
+5 - Delete contact
 0 - Exit
 ```
 
