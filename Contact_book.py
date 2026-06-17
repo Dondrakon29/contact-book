@@ -28,6 +28,7 @@ def show_menu():
     print("4 - Search by name")
     print("5 - Delete contact")
     print("6 - Edit contact")
+    print("7 - Clear all contacts")
     print("0 - Exit")
 
 def get_name(prompt):
@@ -226,7 +227,23 @@ def delete_contact(contacts):
     deleted_contact = contacts.pop(index)
     save_contacts(contacts)
 
-    print("Deleted:", deleted_contact["name"])            
+    print("Deleted:", deleted_contact["name"])
+
+def clear_contacts(contacts):
+    if not contacts:
+        print("No contacts to clear")
+        return
+
+    confirm = input("Are you sure? yes/no: ").strip().lower()
+
+    if confirm != "yes":
+        print("Clear cancelled")
+        return
+
+    contacts.clear()
+    save_contacts(contacts)
+
+    print("All contacts cleared")                
 
 
 def run_app():
@@ -246,7 +263,9 @@ def run_app():
         elif choice == "5":
             delete_contact(contacts)
         elif choice == "6":
-            edit_contact(contacts)                
+            edit_contact(contacts)
+        elif choice == "7":
+            clear_contacts(contacts)                    
         elif choice == "0":
             print("Goodbye!")
             break
