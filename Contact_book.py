@@ -5,6 +5,7 @@ def save_contacts(contacts):
     with open("contacts.json", "w") as file:
         json.dump(contacts, file, indent=4)
 
+
 def load_contacts():
     try:
         with open("contacts.json", "r") as file:
@@ -179,7 +180,7 @@ def edit_contact(contacts):
     contact = contacts[index]
 
     print("Current contact:")
-    print(number, contact)
+    print_contact(number, contact)
 
     new_name = get_optional_name("Enter new name or press enter to keep current: ", contact["name"])
 
